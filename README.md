@@ -37,3 +37,9 @@ Writerside/
 |---------|------------|
 | iEDI.app API | [IEDIAppApiDoc](https://github.com/iEDI-hnet/IEDIAppApiDoc) |
 | FastProducts | [FastSeriesDoc](https://github.com/iEDI-hnet/FastSeriesDoc) |
+
+## License
+
+Documentation is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See [LICENSE](LICENSE).
+
+Copyright © 2001–2026 [iEDI.com ApS](https://iedi.com).
