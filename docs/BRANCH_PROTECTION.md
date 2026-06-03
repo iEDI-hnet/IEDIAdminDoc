@@ -5,6 +5,7 @@ Use these settings so only reviewed changes reach **master**, and GitHub Pages o
 ## Prerequisites
 
 - Repository created on GitHub (public)
+- At least one commit pushed to **`master`** (the branch must exist before the rule applies)
 - You have **Admin** role on the repo (or org owner for org-wide rules)
 
 ## Steps (repository settings)
@@ -13,39 +14,54 @@ Use these settings so only reviewed changes reach **master**, and GitHub Pages o
 2. Under **Branch protection rules**, click **Add rule** (or **Add branch ruleset** if your org uses rulesets).
 3. **Branch name pattern:** `master`  
    (If your default branch is `main`, use `main` and update `branches:` in `.github/workflows/build-docs.yml` to match.)
-4. Enable:
+4. Configure each control as below. (Wording matches **classic branch protection rules**; org **rulesets** use the same ideas with different labels.)
 
-| Setting | Recommendation |
-|---------|----------------|
-| **Require a pull request before merging** | On |
-| **Require approvals** | 1 (or 2 for stricter teams) |
-| **Dismiss stale pull request approvals when new commits are pushed** | On |
-| **Require status checks to pass before merging** | On (after first workflow run exists) |
-| **Require branches to be up to date before merging** | On (optional) |
-| **Require conversation resolution before merging** | On (optional) |
-| **Do not allow bypassing the above settings** | On for admins in production repos |
-| **Restrict who can push to matching branches** | Optional — limit to docs maintainers |
-| **Allow force pushes** | **Off** |
-| **Allow deletions** | **Off** |
+### Pull requests and reviews
 
-5. Save the rule.
+| Control | Set to | Notes |
+|---------|--------|--------|
+| **Require a pull request before merging** | **Checked** | Blocks direct pushes to `master` (except bypass roles, if any). |
+| ↳ **Required approvals** | **1** | Use **2** only if your team policy requires two reviewers. |
+| ↳ **Require approval from Code Owners** | **Unchecked** | Only enable after you add a [`CODEOWNERS`](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) file. |
+| ↳ **Dismiss stale pull request approvals when new commits are pushed** | **Checked** | A new push on the PR clears old approvals so reviewers re-check the latest diff. |
+| ↳ **Require approval of the most recent reviewable push** | **Checked** (recommended) | Someone must approve the latest commit, not an older one. |
+| ↳ **Require conversation resolution before merging** | **Checked** (recommended) | All review threads on the PR must be marked resolved. |
+| ↳ **Allowed merge methods** | Your choice | **Squash merge** keeps `master` history linear; **Merge commit** preserves PR branch commits. Either is fine for docs. |
 
-## Status checks (after first publish)
+### Status checks (read before enabling)
 
-Once **Build documentation** has run at least once:
+The workflow [build-docs.yml](../.github/workflows/build-docs.yml) runs on **`push` to `master` only** — not on `pull_request`. That means:
 
-1. Edit the branch rule.
-2. Under **Require status checks**, search and select:
-   - `version-check` (always runs on push to `master` when paths match)
-   - `build` / `deploy` (only when version changed — optional; may block PRs that only edit topics without version bump)
+- Checks appear in the Actions tab **after** something is pushed to `master` (first push, or after a PR is merged).
+- They do **not** run on open PRs today, so you **cannot** reliably require `version-check` / `build` / `deploy` **before** merge unless you extend the workflow later.
 
-**Note:** Topic-only commits on `master` without a version bump will pass `version-check` but skip `build`. That is intentional. For PRs, you do not need `build` as a required check unless every merge must build.
+| Control | Set to | Notes |
+|---------|--------|--------|
+| **Require status checks to pass before merging** | **Unchecked** (recommended for now) | Turn **on** only if you add a `pull_request` trigger and checks that run on every PR. |
+| ↳ **Require branches to be up to date before merging** | Leave off with checks off | Only relevant when status checks are required. |
 
-Practical approach:
+If you enable status checks later (after workflow runs on PRs):
 
-- Require **pull request + approval** for merges to `master`.
-- Do **not** require `build` on PRs (version often bumped only on release commit).
-- Rely on version gate on `master` push for publish.
+1. Push to `master` at least once so **Actions** has run **Build documentation**.
+2. Edit the rule → **Require status checks** → search the list (names match job ids):
+   - **`version-check`** — always runs on qualifying pushes to `master`.
+   - **`build`** / **`deploy`** — run only when `version` in `writerside.cfg` changed; **do not** require these on every PR or topic-only merges will never pass the check.
+
+### Bypass, push access, and destructive actions
+
+| Control | Set to | Notes |
+|---------|--------|--------|
+| **Do not allow bypassing the above settings** | **Checked** | Applies to admins too; use org owners only for emergencies. |
+| ↳ **Restrict who can push to matching branches** | **Optional** | If checked, add a team (e.g. docs maintainers). Everyone else must use PRs. Leave **unchecked** if all writers open PRs and you only use “Require a pull request”. |
+| **Allow force pushes** | **Unchecked** (nobody) | Prevents rewriting `master` history. |
+| **Allow deletions** | **Unchecked** | Prevents deleting `master`. |
+
+### Recommended minimum (this repo, today)
+
+1. **Require a pull request** + **1 approval** + **dismiss stale approvals** + **approve latest push**.
+2. **Do not** require status checks until the workflow runs on PRs.
+3. **No force push**, **no branch deletion**, **no bypass** for admins.
+4. **Save** the rule.
 
 ## Release workflow for editors
 
