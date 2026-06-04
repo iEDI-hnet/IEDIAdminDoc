@@ -27,9 +27,9 @@ Writerside/
 | Table of contents | `Writerside/iedi-adm.tree` |
 | Branding / footer | `Writerside/cfg/buildprofiles.xml` |
 | Guide version (triggers CI) | `version="…"` on `<instance>` in `writerside.cfg` |
-| WebStorm setup | [docs/WEBSTORM_WRITERSIDE_SETUP.md](docs/WEBSTORM_WRITERSIDE_SETUP.md) |
-| GitHub Pages setup | [docs/GITHUB_PAGES_SETUP.md](docs/GITHUB_PAGES_SETUP.md) |
-| Branch protection | [docs/BRANCH_PROTECTION.md](docs/BRANCH_PROTECTION.md) |
+| Writerside IDE setup | [WRITERSIDE_IDE_SETUP.md](https://github.com/iEDI-hnet/iedi3api/blob/master/iedi_project_template/docs/user_docs_repo_setup/WRITERSIDE_IDE_SETUP.md) |
+| GitHub Pages setup | [GITHUB_PAGES_SETUP.md](https://github.com/iEDI-hnet/iedi3api/blob/master/iedi_project_template/docs/user_docs_repo_setup/GITHUB_PAGES_SETUP.md) |
+| Branch protection | [BRANCH_PROTECTION.md](https://github.com/iEDI-hnet/iedi3api/blob/master/iedi_project_template/docs/user_docs_repo_setup/BRANCH_PROTECTION.md) |
 
 ## Related guides
 
