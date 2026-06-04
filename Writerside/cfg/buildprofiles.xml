@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE buildprofiles SYSTEM "https://resources.jetbrains.com/writerside/1.0/build-profiles.dtd">
+<buildprofiles xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <footer>
+        <copyright>2001–2026 iEDI.com ApS</copyright>
+        <link href="https://iedi.com">iEDI.com</link>
+        <link href="https://iedi.com/customer-portal/">Helpdesk</link>
+        <link href="mailto:info@iedi.com">Contact</link>
+    </footer>
+
+    <build-profile instance="iedi-adm">
+        <variables>
+            <noindex-content>true</noindex-content>
+            <primary-color>#436a4b</primary-color>
+            <link-color>#436a4b</link-color>
+            <color-preset>vivid</color-preset>
+            <product-web-url>https://iedi.com</product-web-url>
+            <custom-favicons>favicon.ico</custom-favicons>
+            <header-logo>iedi-logo.png</header-logo>
+        </variables>
+    </build-profile>
+
+</buildprofiles>
