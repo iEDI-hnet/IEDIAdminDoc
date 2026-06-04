@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="iedi-adm" name="iEDI Admin Guide" start-page="01-about.md">
+    <toc-element topic="01-about.md"/>
+    <toc-element topic="02-sign-in-and-access.md"/>
+    <toc-element topic="03-dimensions-and-environment.md"/>
+    <toc-element topic="04-navigation.md"/>
+    <toc-element topic="05-dashboard.md"/>
+    <toc-element toc-title="Accounts" topic="10-accounts-overview.md"/>
+    <toc-element topic="11-accounts-iedi-com.md"/>
+    <toc-element topic="12-accounts-portal-and-pricat.md"/>
+    <toc-element topic="13-accounts-online-forms.md"/>
+    <toc-element topic="14-account-detail-tabs.md"/>
+    <toc-element toc-title="EDI messages" topic="20-edi-overview.md"/>
+    <toc-element topic="21-edi-messages.md"/>
+    <toc-element topic="22-edi-other-messages.md"/>
+    <toc-element topic="23-edi-archive.md"/>
+    <toc-element topic="24-edi-message-detail-and-timeline.md"/>
+    <toc-element topic="25-edi-pdfs-and-reminders.md"/>
+    <toc-element toc-title="Networks" topic="30-networks-overview.md"/>
+    <toc-element topic="31-networks-protocols-and-endpoints.md"/>
+    <toc-element topic="32-networks-ppf-france.md"/>
+    <toc-element topic="33-networks-nemhandel-and-others.md"/>
+    <toc-element toc-title="Tools" topic="40-tools-overview.md"/>
+    <toc-element topic="41-tools-superuser.md"/>
+    <toc-element topic="42-tools-quicksetup-overwatch-abc.md"/>
+    <toc-element topic="43-tools-blog-and-feedback.md"/>
+    <toc-element topic="50-getting-help.md"/>
+</instance-profile>
